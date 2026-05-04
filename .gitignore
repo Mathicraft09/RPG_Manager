@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# Variables d'environnement (Sécurité !)
+.env
+
+# Base de données locale
+*.db

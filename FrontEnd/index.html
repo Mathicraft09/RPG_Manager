@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Manager — Codex of Personnages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="rune-bg" aria-hidden="true">
+        <span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span>
+        <span>ᚱ</span><span>ᚲ</span><span>ᚷ</span><span>ᚹ</span>
+        <span>ᚺ</span><span>ᚾ</span><span>ᛁ</span><span>ᛃ</span>
+        <span>ᛇ</span><span>ᛈ</span><span>ᛉ</span><span>ᛊ</span>
+        <span>ᛏ</span><span>ᛒ</span><span>ᛖ</span><span>ᛗ</span>
+    </div>
+
+    <header class="site-header">
+        <div class="header-deco" aria-hidden="true">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+        </div>
+        <h1 class="site-title">
+            <span class="title-small">Codex of</span>
+            RPG Manager
+        </h1>
+        <p class="site-subtitle">Character Manager — Forged in the Dark</p>
+        <div class="header-deco" aria-hidden="true">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <section class="form-section">
+            <div class="section-label" aria-hidden="true">
+                <span class="section-line"></span>
+                <span class="section-tag">Invoke</span>
+                <span class="section-line"></span>
+            </div>
+            <h2 class="section-title">Create a Character</h2>
+
+            <form id="create-form" class="char-form" novalidate>
+                <div class="form-row">
+                    <div class="field-group">
+                        <label for="nom">Hero Name</label>
+                        <input type="text" id="nom" name="nom" placeholder="Aragorn..." autocomplete="off">
+                        <span class="field-error" id="err-nom"></span>
+                    </div>
+                    <div class="field-group">
+                        <label for="classe">Class</label>
+                        <div class="select-wrapper">
+                            <select id="classe" name="classe">
+                                <option value="">— Choose —</option>
+                                <option value="Guerrier">Warrior</option>
+                                <option value="Mage">Mage</option>
+                                <option value="Rôdeur">Lurker</option>
+                                <option value="Paladin">Paladin</option>
+                                <option value="Voleur">Thief</option>
+                                <option value="Druide">Druid</option>
+                                <option value="Nécromancien">Necromancer</option>
+                                <option value="Barbare">Barbarous</option>
+                            </select>
+                            <span class="select-arrow" aria-hidden="true">&#9660;</span>
+                        </div>
+                        <span class="field-error" id="err-classe"></span>
+                    </div>
+                </div>
+
+                <div class="form-row stats-row">
+                    <div class="field-group stat-field">
+                        <label for="niveau">
+                            <span class="stat-icon" aria-hidden="true">⚔</span>
+                            Level
+                        </label>
+                        <input type="number" id="niveau" name="niveau" value="1" min="1" max="99">
+                        <span class="field-error" id="err-niveau"></span>
+                    </div>
+                    <div class="field-group stat-field">
+                        <label for="pv">
+                            <span class="stat-icon heart" aria-hidden="true">♥</span>
+                            Life
+                        </label>
+                        <input type="number" id="pv" name="pv" placeholder="100" min="1">
+                        <span class="field-error" id="err-pv"></span>
+                    </div>
+                    <div class="field-group stat-field">
+                        <label for="attaque">
+                            <span class="stat-icon" aria-hidden="true">⚡</span>
+                            Attack
+                        </label>
+                        <input type="number" id="attaque" name="attaque" placeholder="25" min="1">
+                        <span class="field-error" id="err-attaque"></span>
+                    </div>
+                    <div class="field-group stat-field">
+                        <label for="defense">
+                            <span class="stat-icon" aria-hidden="true">🛡</span>
+                            Defense
+                        </label>
+                        <input type="number" id="defense" name="defense" placeholder="15" min="1">
+                        <span class="field-error" id="err-defense"></span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="global-error" id="global-error" role="alert" aria-live="polite"></div>
+                    <button type="submit" class="btn btn-create" id="btn-create">
+                        <span class="btn-rune" aria-hidden="true">ᚠ</span>
+                        Summon the Character
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="roster-section">
+            <div class="section-label" aria-hidden="true">
+                <span class="section-line"></span>
+                <span class="section-tag">Roster</span>
+                <span class="section-line"></span>
+            </div>
+            <div class="roster-header">
+                <h2 class="section-title">The Heros</h2>
+                <span class="char-count" id="char-count">— characters</span>
+            </div>
+
+            <div class="cards-grid" id="cards-grid">
+                <div class="loading-state" id="loading-state">
+                    <span class="loading-rune" aria-hidden="true">ᚦ</span>
+                    <p>Consulting the Codex…</p>
+                </div>
+            </div>
+
+            <div class="empty-state hidden" id="empty-state">
+                <p class="empty-rune" aria-hidden="true">ᛟ</p>
+                <p class="empty-text">The Codex is empty.<br>Summon your first hero.</p>
+            </div>
+
+            <div class="error-state hidden" id="error-state" role="alert">
+                <p class="error-rune" aria-hidden="true">ᛉ</p>
+                <p id="error-message">Unable to contact the server.</p>
+                <button class="btn btn-ghost" onclick="fetchPersonnages()">Try again</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>RPG Manager · FastAPI + PostgreSQL + Vanilla JS</p>
+        <p>Autor: Matihcraft</p>
+    </footer>
+
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
